@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "deploy": "node scripts/gh-pages-deploy.js"
+    "deploy": "node deploy/gh-pages-deploy.js"
   },
   "dependencies": {
     "buefy": "^0.9.7",
