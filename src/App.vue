@@ -1,15 +1,12 @@
 <template>
-  <div class="container">
+  <div class="main-section">
     <router-view />
   </div>
 </template>
 
 <style>
-body {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-}
-html {
-  height: -webkit-fill-available;
+.main-section {
+  padding: 1em;
+  height: 98vh;
 }
 </style>
