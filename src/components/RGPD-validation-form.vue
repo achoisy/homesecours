@@ -1,7 +1,7 @@
 <template>
   <form action="" class="p-3">
     <div class="modal-card" style="max-width: 400px;">
-      <section class="modal-card-body">
+      <section class="modal-card-body py-6">
         <b-field>
           <b-checkbox>
             J’accepte les règles d’utilisation du site homesecours.fr et le
@@ -35,5 +35,8 @@ export default {
 <style>
 form .modal-card {
   border-radius: 1rem;
+}
+form .modal-card .field:not(:last-child) {
+  margin-bottom: 1.5rem;
 }
 </style>
