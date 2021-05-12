@@ -12,7 +12,7 @@ const fs = require('fs');
 
     // Commit all changes to gh-pages local branch
     await execa('git', ['add', 'dist']);
-    await execa('git', ['commit', '-m', 'deploy gh-pages']);
+    await execa('git', ['commit', '-m', 'deploy-gh-pages']);
 
     console.log('Pushing to gh-pages...');
     await execa('git', [
