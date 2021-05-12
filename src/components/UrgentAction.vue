@@ -11,14 +11,12 @@
               <p class="title-500">
                 Une urgence ? Un problème de sérrure, de plomberie ou encore
                 electrique qui nécessite une
-                <span class="font-900">intervention rapide</span> ?
+                <span class="font-900">intervention urgente</span> ?
               </p>
               <b-button
-                class="button is-fullwidth is-danger add-shadow is-extra-height"
-                :size="
-                  $screen.breakpoint != 'mobile' ? 'is-large' : 'is-medium'
-                "
-                label="Intervention Immédiate"
+                class="button is-fullwidth is-danger add-shadow is-extra-height is-small-caps"
+                size="is-large"
+                label="intervention urgente"
                 icon-right="clock-fast"
               >
               </b-button>
@@ -56,13 +54,12 @@ export default {
 }
 
 .add-shadow {
-  filter: drop-shadow(5px 5px 6px rgba($red, 0.2));
+  filter: drop-shadow(5px 5px 6px rgba($red, 0.5));
 }
 
 .title-500 {
   text-align: justify;
   font-size: 1.5rem;
-  letter-spacing: -0.02em;
   line-height: 1.4;
   margin-bottom: 2rem;
   white-space: pre-wrap;
@@ -82,7 +79,6 @@ export default {
   .title-500 {
     text-align: center;
     font-size: 2rem;
-    letter-spacing: -0.02em;
     line-height: 1.4;
   }
 }
