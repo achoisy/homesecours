@@ -25,7 +25,6 @@ const fs = require('fs');
       folderName,
       'origin',
       'HEAD:gh-pages',
-      '--force',
     ]);
 
     // await execa('rm', ['-r', folderName]);
