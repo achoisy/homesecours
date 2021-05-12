@@ -6,14 +6,29 @@ const fs = require('fs');
     await execa('git', ['checkout', '--orphan', 'gh-pages']);
     // eslint-disable-next-line no-console
     console.log('Building started...');
-    await execa('npm', ['run', 'build']);
+    await execa('yarn', ['build']);
     // Understand if it's dist or build folder
     const folderName = fs.existsSync('dist') ? 'dist' : 'build';
-    await execa('git', ['--work-tree', folderName, 'add', '--all']);
-    await execa('git', ['--work-tree', folderName, 'commit', '-m', 'gh-pages']);
+    // await execa('git', ['--work-tree', folderName, 'add', '--all']);
+    // await execa('git', ['--work-tree', folderName, 'commit', '-m', 'gh-pages']);
+
+    // Commit all changes to gh-pages local branch
+    await execa('git', ['add', '--all']);
+    await execa('git', ['commit', '-m', 'gh-pages']);
+
     console.log('Pushing to gh-pages...');
-    await execa('git', ['push', 'origin', 'HEAD:gh-pages', '--force']);
-    await execa('rm', ['-r', folderName]);
+    //await execa('git', ['push', 'origin', 'HEAD:gh-pages', '--force']);
+    await execa('git', [
+      'subtree',
+      'push',
+      '--prefix',
+      folderName,
+      'origin',
+      'HEAD:gh-pages',
+      '--force',
+    ]);
+
+    // await execa('rm', ['-r', folderName]);
     await execa('git', ['checkout', '-f', 'main']);
     await execa('git', ['branch', '-D', 'gh-pages']);
     console.log('Successfully deployed, check your settings');
