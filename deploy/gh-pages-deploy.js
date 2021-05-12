@@ -24,7 +24,7 @@ const fs = require('fs');
       '--prefix',
       folderName,
       'origin',
-      'HEAD:gh-pages',
+      'gh-pages',
     ]);
 
     // await execa('rm', ['-r', folderName]);
