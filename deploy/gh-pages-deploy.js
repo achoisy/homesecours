@@ -19,12 +19,11 @@ const fs = require('fs');
     console.log('Pushing to gh-pages...');
     //await execa('git', ['push', 'origin', 'HEAD:gh-pages', '--force']);
     await execa('git', [
-      'subtree',
       'push',
-      '--prefix',
-      folderName,
       'origin',
-      'gh-pages',
+      '`git subtree split --prefix dist gh-pages`',
+      ':gh-pages',
+      '--force',
     ]);
 
     // await execa('rm', ['-r', folderName]);
