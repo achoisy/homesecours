@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="tile is-parent">
-          <article class="tile is-child notification is-success">
+          <article class="tile is-child is-success px-0">
             <div class="content">
               <p class="title">Avis clients</p>
               <div class="content">

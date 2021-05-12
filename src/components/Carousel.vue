@@ -2,9 +2,14 @@
   <b-carousel :indicator="false">
     <b-carousel-item v-for="(avis, i) in listAvis" :key="i">
       <div class="avis-box">
-        <b-rate :value="avis.note" show-score disabled />
-        <p class="subtitle">{{ avis.text }}</p>
-        <p class="title is-size-5">{{ avis.nom }}</p>
+        <p class="subtitle line-clamp">
+          <b-rate :value="avis.note" show-score disabled class="mb-3" />
+          {{ avis.text }}
+        </p>
+        <p class="has-text-right">
+          {{ avis.nom }}
+        </p>
+        <p class="title is-size-6"></p>
       </div>
     </b-carousel-item>
   </b-carousel>
@@ -59,12 +64,14 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 20vh;
+  min-height: 10rem;
 }
 .line-clamp {
+  flex-grow: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-align: justify;
 }
 </style>

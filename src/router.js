@@ -9,14 +9,14 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
+    name: 'landing',
+    component: Landing,
+  },
+  {
+    path: '*',
     redirect: {
       name: 'landing',
     },
-  },
-  {
-    path: '/landing',
-    name: 'landing',
-    component: Landing,
   },
 ];
 
