@@ -21,7 +21,7 @@ const fs = require('fs');
     await execa('git', [
       'push',
       'origin',
-      '`git subtree split --prefix dist gh-pages`',
+      `git subtree split --prefix dist gh-pages`,
       ':gh-pages',
       '--force',
     ]);
