@@ -1,0 +1,25 @@
+<template>
+  <div class="tile is-parent">
+    <article class="tile is-child is-success px-0">
+      <div class="content">
+        <p class="title">Avis clients</p>
+        <div class="content">
+          <Carousel />
+        </div>
+      </div>
+    </article>
+  </div>
+</template>
+
+<script>
+import Carousel from './Carousel';
+
+export default {
+  name: 'AvisClient',
+  components: {
+    Carousel,
+  },
+};
+</script>
+
+<style></style>
