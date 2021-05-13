@@ -59,7 +59,7 @@ export default {
 
 .title-500 {
   text-align: justify;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 1.4;
   margin-bottom: 2rem;
   white-space: pre-wrap;

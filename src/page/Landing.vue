@@ -1,7 +1,7 @@
 <template>
   <div class="landing" style="height: 100%">
     <UrgentAction />
-    <section class="section">
+    <section class="section has-background-white-bis">
       <div class="tile is-ancestor">
         <CarteOffre :offre="offres[0]" />
         <CarteOffre :offre="offres[1]" />
