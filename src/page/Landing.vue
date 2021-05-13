@@ -2,15 +2,16 @@
   <div class="landing" style="height: 100%">
     <UrgentAction />
     <section class="section has-background-white-bis">
-      <div class="tile is-ancestor">
-        <CarteOffre :offre="offres[0]" />
-        <CarteOffre :offre="offres[1]" />
-        <CarteOffre :offre="offres[2]" />
-      </div>
-      <div class="tile is-ancestor">
-        <CarteOffre :offre="offres[3]" />
-        <CarteOffre :offre="offres[4]" />
-        <CarteOffre :offre="offres[5]" />
+      <div
+        v-for="(offres, index1) in sOffres"
+        :key="index1"
+        class="tile is-ancestor"
+      >
+        <CarteOffre
+          v-for="(offre, index2) in offres"
+          :offre="offre"
+          :key="index2"
+        />
       </div>
       <div class="tile is-ancestor">
         <AvisClient />
@@ -40,9 +41,10 @@
 </template>
 
 <script>
+import { shuffle } from 'lodash';
 import Carousel from '../components/Carousel';
 import RgpdModal from '../components/RGPD-validation-form';
-import UrgentAction from '../components/UrgentAction';
+import UrgentAction from '../components/MainHero';
 import AvisClient from '../components/AvisClient';
 import CarteOffre from '../components/OfferTiles';
 
@@ -104,9 +106,37 @@ export default {
       ],
     };
   },
+  computed: {
+    sOffres: function() {
+      switch (this.$screen.breakpoint) {
+        case 'mobile': // 2
+          return this.createOffreList(1);
+        case 'tablet': // 2
+          return this.createOffreList(2);
+        case 'desktop': // 3
+          return this.createOffreList(3);
+        default:
+          // 4
+          return this.createOffreList(4);
+      }
+    },
+  },
   methods: {
     confirm() {
       this.$buefy;
+    },
+    createOffreList(nbColumns) {
+      let offreList = [];
+      shuffle(this.offres).forEach((offre) => {
+        if (offreList.length <= 0) {
+          offreList.push([offre]);
+        } else if (offreList[offreList.length - 1].length < nbColumns) {
+          offreList[offreList.length - 1].push(offre);
+        } else {
+          offreList.push([offre]);
+        }
+      });
+      return offreList;
     },
   },
 };

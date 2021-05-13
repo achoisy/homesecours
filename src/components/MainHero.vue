@@ -25,6 +25,29 @@
         </div>
       </div>
     </div>
+    <div class="hero-foot is-hidden-mobile">
+      <nav class="tabs is-boxed is-fullwidth">
+        <div class="container is-small-caps">
+          <ul>
+            <li class="is-active">
+              <a><i class="fas fa-home mr-2"></i>accueil</a>
+            </li>
+            <li>
+              <a>services</a>
+            </li>
+            <li>
+              <a>contact</a>
+            </li>
+            <li>
+              <a>avis clients</a>
+            </li>
+            <li>
+              <a>galerie</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
   </section>
 </template>
 
@@ -71,6 +94,17 @@ export default {
 
 .is-extra-height {
   height: 4rem;
+}
+
+.hero-foot .tabs a {
+  color: white;
+}
+.hero-foot .tabs a:hover {
+  color: $turquoise;
+}
+.hero-foot .tabs li.is-active a {
+  background-color: $white-bis;
+  font-family: MuseoSansRounded-900;
 }
 @media screen and (min-width: $tablet) {
   .landing .hero {

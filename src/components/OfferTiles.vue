@@ -45,7 +45,8 @@ export default {
   },
   computed: {
     isNotMobile: function() {
-      return this.$screen.breakpoint != 'mobile' ? true : false;
+      //return this.$screen.breakpoint != 'mobile' ? true : false;
+      return this.$screen.width >= 1024 ? true : false;
     },
   },
 };
