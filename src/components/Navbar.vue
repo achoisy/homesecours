@@ -20,10 +20,11 @@
           />
         </div>
       </router-link>
+
       <a
         role="button"
-        class="navbar-burger is-hidden-tablet is-align-self-center"
-        :class="{ 'is-active': sidebarIsOpen }"
+        class="navbar-burger is-hidden-tablet is-align-self-center on-right ease-in-out"
+        :class="{ 'is-active': sidebarIsOpen, 'fixed-burger': stickyBurger }"
         aria-label="menu"
         aria-expanded="false"
         @click="sideBarToggle"
@@ -42,7 +43,7 @@
     >
       <a
         role="button"
-        class="navbar-burger on-left"
+        class="navbar-burger"
         :class="{ 'is-active': sidebarIsOpen }"
         aria-label="menu"
         aria-expanded="false"
@@ -52,24 +53,31 @@
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
-      <aside class="menu">
+      <aside class="menu" :class="{ 'fixed-burger': stickyBurger }">
         <Menu />
       </aside>
     </b-sidebar>
+    <Observer
+      sentinal-name="navbar-end"
+      @on-intersection-element="onIntersectionElement"
+    ></Observer>
   </nav>
 </template>
 
 <script>
 import Menu from './Menu';
+import Observer from './IntersectionObserver';
 
 export default {
   name: 'Navbar',
   components: {
     Menu,
+    Observer,
   },
   data: function() {
     return {
       sidebarIsOpen: false,
+      stickyBurger: false,
     };
   },
   computed: {
@@ -80,6 +88,10 @@ export default {
   methods: {
     sideBarToggle: function() {
       this.sidebarIsOpen = !this.sidebarIsOpen;
+    },
+    onIntersectionElement: function(value) {
+      this.stickyBurger = !value;
+      console.log(this.stickyBurger);
     },
   },
 };
@@ -112,5 +124,21 @@ export default {
   justify-content: flex-start;
   align-items: center;
   padding: 10px;
+}
+.on-right {
+  position: fixed !important;
+  right: 5px;
+  top: 0px;
+  background-color: white;
+  border-radius: 50px;
+  height: 42px;
+  width: 42px;
+  transition: all 0.5s;
+}
+.fixed-burger {
+  top: 15px;
+}
+.ease-in-out {
+  transition-timing-function: ease-out;
 }
 </style>

@@ -31,7 +31,7 @@
     ></Observer>
     <div class="hero-foot is-hidden-mobile">
       <nav
-        class="tabs is-boxed is-fullwidth is-large"
+        class="tabs is-boxed is-fullwidth is-large ease-in "
         :class="{
           sticky: stickNavbar,
         }"
@@ -105,6 +105,10 @@ export default {
   height: 4rem;
 }
 
+.hero-foot .tabs {
+  transition: all 1s;
+}
+
 .hero-foot .tabs a {
   color: white;
 }
@@ -123,6 +127,10 @@ export default {
   font-family: MuseoSansRounded-900;
 }
 
+.ease-in {
+  transition-timing-function: ease-in;
+}
+
 .sticky {
   position: fixed;
   top: 0px;
@@ -131,7 +139,7 @@ export default {
   color: $black-ter;
   background-color: $cyan;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.5s ease-in-out;
 }
 @media screen and (min-width: $tablet) {
   .landing .hero {
