@@ -1,6 +1,8 @@
 <template>
-  <div class="tile is-parent is-vertical">
-    <div class="card tile is-child carte-offre">
+  <div class="tile is-parent" :class="size">
+    <div
+      class="card tile is-child carte-offre is-flex is-flex-direction-column"
+    >
       <div class="card-image">
         <figure class="image is-4by3">
           <img
@@ -15,7 +17,7 @@
           </div>
         </figure>
       </div>
-      <div class="card-content">
+      <div class="card-content is-flex-grow-1">
         <p class="subtitle">{{ offre.text }}</p>
       </div>
       <footer class="card-footer">
@@ -42,6 +44,7 @@ export default {
       color: String,
       backgroundImage: String,
     },
+    size: String,
   },
   computed: {
     isNotMobile: function() {
@@ -54,8 +57,13 @@ export default {
 
 <style lang="scss">
 .carte-offre {
+  border-radius: 5px 5px 15px 15px;
+}
+
+footer .carte-offre {
   border-radius: 0px 0px 15px 15px;
 }
+
 .is-extra-height {
   height: 4rem;
 }

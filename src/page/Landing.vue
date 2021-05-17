@@ -2,28 +2,17 @@
   <div class="landing" style="height: 100%">
     <UrgentAction />
     <section class="section has-background-white-bis">
-      <div
-        v-for="(offres, index1) in sOffres"
-        :key="index1"
-        class="tile is-ancestor"
-      >
+      <div class="tile is-ancestor is-flex-wrap-wrap">
         <CarteOffre
           v-for="(offre, index2) in offres"
           :offre="offre"
           :key="index2"
+          :size="getSize"
         />
-      </div>
-      <div class="tile is-ancestor">
+        <GoogleMap :size="getSize" />
         <AvisClient />
       </div>
-      <div class="columns ">
-        <div class="column is-half is-offset-one-quarter">
-          <p class="has-text-weight-medium">
-            Un vrai savoir faire en serrurerie, plomberie, électricité,
-            rénovation, menuiserie, pose de cuisine...
-          </p>
-        </div>
-      </div>
+      <div class="tile is-ancestor is-flex-wrap-wrap"></div>
     </section>
 
     <b-modal
@@ -47,6 +36,7 @@ import RgpdModal from '../components/RGPD-validation-form';
 import UrgentAction from '../components/MainHero';
 import AvisClient from '../components/AvisClient';
 import CarteOffre from '../components/OfferTiles';
+import GoogleMap from '../components/GoogleMap';
 
 export default {
   name: 'Landing',
@@ -56,6 +46,7 @@ export default {
     UrgentAction,
     AvisClient,
     CarteOffre,
+    GoogleMap,
   },
   data: function() {
     return {
@@ -118,6 +109,19 @@ export default {
         default:
           // 4
           return this.createOffreList(4);
+      }
+    },
+    getSize: function() {
+      switch (this.$screen.breakpoint) {
+        case 'mobile': // 2
+          return 'is-12';
+        case 'tablet': // 2
+          return 'is-6';
+        case 'desktop': // 3
+          return 'is-4';
+        default:
+          // 4
+          return 'is-3';
       }
     },
   },

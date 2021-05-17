@@ -1,5 +1,5 @@
 <template>
-  <div class="tile is-parent">
+  <div class="tile is-parent" :class="size">
     <article class="tile is-child is-success px-0">
       <div class="content">
         <p class="title">Avis clients</p>
@@ -16,6 +16,9 @@ import Carousel from './Carousel';
 
 export default {
   name: 'AvisClient',
+  props: {
+    size: String,
+  },
   components: {
     Carousel,
   },
