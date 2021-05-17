@@ -1,7 +1,7 @@
 <template>
   <div class="tile is-parent" :class="size">
     <div
-      class="card tile is-child carte-offre is-flex is-flex-direction-column"
+      class="card tile is-child carte-offre is-flex is-flex-direction-column "
     >
       <div class="card-image">
         <figure class="image is-4by3">

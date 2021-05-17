@@ -37,6 +37,8 @@ import UrgentAction from '../components/MainHero';
 import AvisClient from '../components/AvisClient';
 import CarteOffre from '../components/OfferTiles';
 import GoogleMap from '../components/GoogleMap';
+import Menu from '../components/Menu';
+import Observer from '../components/IntersectionObserver';
 
 export default {
   name: 'Landing',
@@ -47,9 +49,12 @@ export default {
     AvisClient,
     CarteOffre,
     GoogleMap,
+    Menu,
+    Observer,
   },
   data: function() {
     return {
+      stickNavbar: false,
       isRgpdModalActive: false,
       offres: [
         {
@@ -142,6 +147,10 @@ export default {
       });
       return offreList;
     },
+    onIntersectionElement: function(value) {
+      this.stickNavbar = !value;
+      console.log(this.stickNavbar);
+    },
   },
 };
 </script>
@@ -152,5 +161,8 @@ export default {
 
 .is-small-caps {
   font-variant: small-caps;
+}
+.short + .section {
+  padding-top: 6rem;
 }
 </style>

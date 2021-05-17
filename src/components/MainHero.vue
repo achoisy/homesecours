@@ -1,5 +1,5 @@
 <template>
-  <section class="hero">
+  <section class="hero" :class="{ short: stickNavbar }">
     <div class="hero-body">
       <div class="container">
         <div class="columns ">
@@ -25,8 +25,17 @@
         </div>
       </div>
     </div>
+    <Observer
+      sentinal-name="hero-end"
+      @on-intersection-element="onIntersectionElement"
+    ></Observer>
     <div class="hero-foot is-hidden-mobile">
-      <nav class="tabs is-boxed is-fullwidth">
+      <nav
+        class="tabs is-boxed is-fullwidth is-large"
+        :class="{
+          sticky: stickNavbar,
+        }"
+      >
         <Menu />
       </nav>
     </div>
@@ -35,11 +44,24 @@
 
 <script>
 import Menu from './Menu';
+import Observer from './IntersectionObserver';
 
 export default {
   name: 'UrgentAction',
   components: {
     Menu,
+    Observer,
+  },
+  data: function() {
+    return {
+      stickNavbar: false,
+    };
+  },
+  methods: {
+    onIntersectionElement: function(value) {
+      this.stickNavbar = !value;
+      console.log(this.stickNavbar);
+    },
   },
 };
 </script>
@@ -86,12 +108,30 @@ export default {
 .hero-foot .tabs a {
   color: white;
 }
+
+.hero-foot .tabs.sticky a {
+  color: $white;
+  // background-color: $white;
+}
+
 .hero-foot .tabs a:hover {
   color: $turquoise;
 }
 .hero-foot .tabs li.is-active a {
   background-color: $white-bis;
+  color: $turquoise;
   font-family: MuseoSansRounded-900;
+}
+
+.sticky {
+  position: fixed;
+  top: 0px;
+  z-index: 99;
+  width: 100%;
+  color: $black-ter;
+  background-color: $cyan;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
 }
 @media screen and (min-width: $tablet) {
   .landing .hero {
