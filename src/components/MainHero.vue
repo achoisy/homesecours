@@ -1,5 +1,5 @@
 <template>
-  <section class="hero" :class="{ short: stickNavbar }">
+  <section ref="main-hero" class="hero" :class="{ short: isShort }">
     <div class="hero-body">
       <div class="container">
         <div class="columns ">
@@ -25,10 +25,7 @@
         </div>
       </div>
     </div>
-    <Observer
-      sentinal-name="hero-end"
-      @on-intersection-element="onIntersectionElement"
-    ></Observer>
+
     <div class="hero-foot is-hidden-mobile">
       <nav
         class="tabs is-boxed is-fullwidth is-large ease-in "
@@ -44,18 +41,39 @@
 
 <script>
 import Menu from './Menu';
-import Observer from './IntersectionObserver';
 
 export default {
   name: 'UrgentAction',
   components: {
     Menu,
-    Observer,
   },
   data: function() {
     return {
       stickNavbar: false,
     };
+  },
+  mounted() {
+    const sentinal = this.$refs['main-hero'];
+
+    const handler = (entries) => {
+      if (entries[0].isIntersecting) {
+        this.stickNavbar = false;
+      } else {
+        this.stickNavbar = true;
+      }
+    };
+
+    const observer = new window.IntersectionObserver(handler);
+
+    observer.observe(sentinal);
+  },
+  computed: {
+    isShort: function() {
+      if (this.$screen.breakpoint != 'mobile' && this.stickNavbar) {
+        return true;
+      }
+      return false;
+    },
   },
   methods: {
     onIntersectionElement: function(value) {
