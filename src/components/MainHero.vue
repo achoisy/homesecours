@@ -1,5 +1,15 @@
 <template>
   <section ref="main-hero" class="hero" :class="{ short: isShort }">
+    <div
+      class="hero-fixed is-hidden-mobile ease-in"
+      :class="{
+        sticky: stickNavbar,
+      }"
+    >
+      <nav class="tabs is-boxed is-fullwidth is-large ">
+        <Menu />
+      </nav>
+    </div>
     <div class="hero-body">
       <div class="container">
         <div class="columns ">
@@ -27,12 +37,7 @@
     </div>
 
     <div class="hero-foot is-hidden-mobile">
-      <nav
-        class="tabs is-boxed is-fullwidth is-large ease-in "
-        :class="{
-          sticky: stickNavbar,
-        }"
-      >
+      <nav class="tabs is-boxed is-fullwidth is-large">
         <Menu />
       </nav>
     </div>
@@ -123,17 +128,8 @@ export default {
   height: 4rem;
 }
 
-.hero-foot .tabs {
-  transition: all 1s;
-}
-
 .hero-foot .tabs a {
   color: white;
-}
-
-.hero-foot .tabs.sticky a {
-  color: $white;
-  // background-color: $white;
 }
 
 .hero-foot .tabs a:hover {
@@ -149,16 +145,32 @@ export default {
   transition-timing-function: ease-in;
 }
 
-.sticky {
+.hero-fixed {
   position: fixed;
-  top: 0px;
+  top: -25px;
   z-index: 99;
   width: 100%;
-  color: $black-ter;
+  color: $white;
   background-color: $cyan;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.5s ease-in-out;
+  opacity: 0;
+  transition: all 0.1s;
 }
+
+.hero-fixed .tabs a {
+  color: white;
+}
+
+.hero-fixed .tabs li.is-active a {
+  color: $turquoise;
+  font-family: MuseoSansRounded-900;
+}
+
+.sticky {
+  top: 0px;
+  opacity: 1;
+}
+
 @media screen and (min-width: $tablet) {
   .landing .hero {
     color: $black-ter;

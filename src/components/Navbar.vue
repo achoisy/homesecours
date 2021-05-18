@@ -139,6 +139,6 @@ export default {
   top: 15px;
 }
 .ease-in-out {
-  transition-timing-function: ease-out;
+  transition-timing-function: ease-in-out;
 }
 </style>
