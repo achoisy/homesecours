@@ -10,7 +10,7 @@
         <Menu />
       </nav>
     </div>
-    <div class="hero-body">
+    <div class="hero-body" style="z-index: 11;">
       <div class="container">
         <div class="columns ">
           <div class="column is-8-tablet is-offset-2-tablet">
@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div class="hero-foot is-hidden-mobile">
+    <div class="hero-foot is-hidden-mobile" style="z-index: 11;">
       <nav class="tabs is-boxed is-fullwidth is-large">
         <Menu />
       </nav>
@@ -151,7 +151,7 @@ export default {
 .hero-fixed {
   position: fixed;
   top: -25px;
-  z-index: 99;
+  z-index: 10;
   width: 100%;
   color: $white;
   background-color: $cyan;

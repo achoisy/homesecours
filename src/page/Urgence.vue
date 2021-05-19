@@ -1,7 +1,7 @@
 <template>
   <section
     class="hero is-fullheight has-background-white-bis"
-    :class="{ 'on-mobile pb-5': $screen.breakpoint == 'mobile' }"
+    :class="{ 'on-mobile': $screen.breakpoint == 'mobile' }"
   >
     <div
       class="hero-head has-background-danger is-flex is-align-items-center is-justify-content-space-between"
@@ -12,7 +12,7 @@
       </p>
       <a class="p-5" @click="() => routerPush('landing')">
         <span class="icon has-text-white is-size-3 is-size-4-mobile">
-          <i class="fas fa-arrow-circle-left fa-lg"></i>
+          <i class="fas fa-times-circle fa-lg"></i>
         </span>
       </a>
     </div>
@@ -39,6 +39,7 @@
                   <div class="field">
                     <div class="control has-icons-left has-icons-right">
                       <input
+                        ref="nom"
                         class="input"
                         name="nom"
                         :class="{
@@ -49,6 +50,7 @@
                         placeholder="ex: John Doe"
                         v-model="form.nom"
                         @blur="inputUpdate"
+                        @focus="hideButton"
                       />
                       <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
@@ -92,6 +94,7 @@
                     </p>
                     <div class="control has-icons-left has-icons-right">
                       <input
+                        ref="tel"
                         name="tel"
                         class="input"
                         :class="{
@@ -102,6 +105,7 @@
                         placeholder="ex: 0696123456"
                         v-model="form.tel"
                         @blur="inputUpdate"
+                        @focus="hideButton"
                       />
                       <span class="icon is-small is-left">
                         <i class="fas fa-phone"></i>
@@ -156,7 +160,7 @@
                   <div class="field">
                     <div class="control">
                       <div class="select">
-                        <select>
+                        <select v-model="form.raison">
                           <option>Serrurerie</option>
                           <option>Plomberie</option>
                           <option>Electricité</option>
@@ -175,6 +179,7 @@
                   <div class="field">
                     <div class="control">
                       <textarea
+                        v-model="form.message"
                         class="textarea"
                         placeholder="Précision sur la nature de votre demande"
                       ></textarea>
@@ -184,30 +189,35 @@
               </div>
             </form>
           </b-step-item>
-          <b-step-item step="3" label="Confirmer">
+          <b-step-item step="3" label="Confirmer" type="is-success">
             <form :class="{ 'p-6': $screen.breakpoint != 'mobile' }">
-              <div class="field">
+              <p class="mb-2">
+                Veuillez vérifier vos informations avant de confirmer votre
+                demande.
+              </p>
+              <span><strong>Nom: </strong>{{ form.nom }}</span> <br />
+              <span><strong>Téléphone: </strong>{{ fullNumber }}</span> <br />
+              <span><strong>Adresse: </strong>{{ form.adresse }}</span> <br />
+              <span><strong>Raison: </strong>{{ form.raison }}</span> <br />
+              <span><strong>Message: </strong>{{ form.message }}</span> <br />
+              <div class="field mt-4">
                 <div class="control">
                   <label class="checkbox">
-                    <input type="checkbox" />
-                    I agree to the <a href="#">terms and conditions</a>
+                    <input type="checkbox" v-model="form.condition" />
+                    J'accepte
+                    <a href="#">les termes et conditions d'utilisation</a> du
+                    site homesecours.fr
                   </label>
-                </div>
-              </div>
-
-              <div class="field is-grouped">
-                <div class="control">
-                  <button class="button is-link">Submit</button>
-                </div>
-                <div class="control">
-                  <button class="button is-link is-light">Cancel</button>
                 </div>
               </div>
             </form>
           </b-step-item>
 
           <template #navigation="{previous, next}">
-            <div class="box is-bottom-fixed ">
+            <div
+              class="box is-bottom-fixed "
+              :class="{ 'is-hidden-mobile': !navigationButton }"
+            >
               <div class="columns is-mobile is-centered is-flex-direction-row">
                 <div class="column is-half-mobile is-3-desktop">
                   <button
@@ -224,10 +234,22 @@
                 <div class="column is-half-mobile is-3-desktop">
                   <button
                     class="button is-info is-small-caps is-fullwidth"
+                    :class="{ 'is-hidden': activeStep >= 2 }"
                     :disabled="next.disabled"
                     @click="() => nextStep(next)"
                   >
                     <span class="is-size-5 mb-1">suivant</span>
+                    <span class="icon is-size-5">
+                      <i class="fas fa-chevron-right"></i>
+                    </span>
+                  </button>
+                  <button
+                    class="button is-success is-small-caps is-fullwidth"
+                    :class="{ 'is-hidden': activeStep < 2 }"
+                    :disabled="!form.condition"
+                    @click="confirmAlert"
+                  >
+                    <span class="is-size-5 mb-1">confirmer</span>
                     <span class="icon is-size-5">
                       <i class="fas fa-chevron-right"></i>
                     </span>
@@ -250,13 +272,14 @@ export default {
   data: function() {
     return {
       activeStep: 0,
+      navigationButton: true,
       form: {
         nom: '',
         tel: '',
         adresse: '',
         message: '',
-        raison: '',
-        condition: false,
+        raison: 'Serrurerie',
+        condition: true,
         token: '',
       },
       regionCode: 'MQ',
@@ -274,6 +297,10 @@ export default {
     checkPhone: function() {
       const tel = new PhoneNumber(this.form.tel, this.regionCode);
       return tel.isValid();
+    },
+    fullNumber: function() {
+      const tel = new PhoneNumber(this.form.tel, this.regionCode);
+      return tel.getNumber('international');
     },
   },
   methods: {
@@ -321,6 +348,25 @@ export default {
     },
     inputUpdate: function({ target }) {
       this.error[target.name] = '';
+      this.unhideButton();
+    },
+    hideButton: function() {
+      this.navigationButton = false;
+    },
+    unhideButton: function() {
+      this.navigationButton = true;
+    },
+    confirmAlert: function() {
+      this.$buefy.dialog.alert({
+        message:
+          "Notre service d'urgence va vous recontacter dans les minutes qui suivront. Garder votre téléphone à porter de main. merci.",
+        confirmText: 'OK',
+        onConfirm: this.isConfirm,
+      });
+    },
+    isConfirm: function() {
+      // TODO: faire le fetch vers le serveur
+      this.$router.push('landing');
     },
   },
 };
@@ -329,6 +375,7 @@ export default {
 <style lang="scss">
 .hero.is-fullheight.on-mobile {
   min-height: calc(100vh - 80px);
+  padding-bottom: 40px;
 }
 .b-steps {
   flex-grow: 1;
