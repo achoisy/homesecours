@@ -28,6 +28,7 @@
                 size="is-large"
                 label="intervention urgente"
                 icon-right="clock-fast"
+                @click="() => routerPush('urgence')"
               >
               </b-button>
             </div>
@@ -83,7 +84,9 @@ export default {
   methods: {
     onIntersectionElement: function(value) {
       this.stickNavbar = !value;
-      console.log(this.stickNavbar);
+    },
+    routerPush: function(address) {
+      this.$router.push(address);
     },
   },
 };

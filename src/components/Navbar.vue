@@ -3,6 +3,7 @@
     class="navbar bottom-border is-white"
     role="navigation"
     arial-label="main navigation"
+    :class="{ 'is-fixed-top': $screen.breakpoint == 'mobile' }"
   >
     <div
       class="navbar-brand "
@@ -23,8 +24,8 @@
 
       <a
         role="button"
-        class="navbar-burger is-hidden-tablet is-align-self-center on-right ease-in-out"
-        :class="{ 'is-active': sidebarIsOpen, 'fixed-burger': stickyBurger }"
+        class="navbar-burger is-hidden-tablet is-align-self-center on-right"
+        :class="{ 'is-active': sidebarIsOpen }"
         aria-label="menu"
         aria-expanded="false"
         @click="sideBarToggle"
@@ -91,7 +92,6 @@ export default {
     },
     onIntersectionElement: function(value) {
       this.stickyBurger = !value;
-      console.log(this.stickyBurger);
     },
   },
 };
@@ -124,21 +124,5 @@ export default {
   justify-content: flex-start;
   align-items: center;
   padding: 10px;
-}
-.on-right {
-  position: fixed !important;
-  right: 5px;
-  top: 0px;
-  background-color: white;
-  border-radius: 50px;
-  height: 42px;
-  width: 42px;
-  transition: all 0.5s;
-}
-.fixed-burger {
-  top: 15px;
-}
-.ease-in-out {
-  transition-timing-function: ease-in-out;
 }
 </style>

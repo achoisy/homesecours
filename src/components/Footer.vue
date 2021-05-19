@@ -9,6 +9,15 @@
       <p>
         © Home Secours 2021
       </p>
+      <p class="pt-5">
+        Ce site est protégé par reCAPTCHA et the Google
+        <a href="https://policies.google.com/privacy"
+          >Politique de confidentialité</a
+        >
+        et
+        <a href="https://policies.google.com/terms">Conditions d'utilisation</a>
+        s'appliquent.
+      </p>
     </div>
   </footer>
 </template>

@@ -8,10 +8,12 @@
     "deploy": "node deploy/gh-pages-deploy.js"
   },
   "dependencies": {
+    "awesome-phonenumber": "^2.51.2",
     "buefy": "^0.9.7",
     "core-js": "^3.6.5",
     "lodash": "^4.17.21",
     "vue": "^2.6.11",
+    "vue-recaptcha-v3": "^1.9.0",
     "vue-router": "^3.2.0",
     "vue-screen": "^1.5.4"
   },

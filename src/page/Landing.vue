@@ -1,6 +1,7 @@
 <template>
   <div class="landing" style="height: 100%">
-    <UrgentAction />
+    <Navbar />
+    <UrgentAction :class="{ 'pt-5': $screen.breakpoint == 'mobile' }" />
     <section class="section has-background-white-bis">
       <div class="tile is-ancestor is-flex-wrap-wrap">
         <CarteOffre
@@ -14,7 +15,7 @@
       </div>
       <div class="tile is-ancestor is-flex-wrap-wrap"></div>
     </section>
-
+    <Footer />
     <b-modal
       v-model="isRgpdModalActive"
       has-modal-card
@@ -39,6 +40,8 @@ import CarteOffre from '../components/OfferTiles';
 import GoogleMap from '../components/GoogleMap';
 import Menu from '../components/Menu';
 import Observer from '../components/IntersectionObserver';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export default {
   name: 'Landing',
@@ -51,6 +54,8 @@ export default {
     GoogleMap,
     Menu,
     Observer,
+    Navbar,
+    Footer,
   },
   data: function() {
     return {
