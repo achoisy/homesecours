@@ -18,10 +18,13 @@
               class="is-flex is-flex-direction-column is-justify-content-space-around"
               :class="$screen.breakpoint != 'mobile' ? 'box box-height' : ''"
             >
-              <p class="title-500">
+              <p
+                class="title-500 is-size-4 is-size-3-widescreen is-size-5-mobile"
+              >
                 Une urgence ? Un problème de sérrure, de plomberie ou encore
                 electrique qui nécessite une
-                <span class="font-900">intervention urgente</span> ?
+                <span class="font-900">intervention urgente</span>? <br />
+                En seulement 3 clicks, on prend en charge votre problème !
               </p>
               <b-button
                 class="button is-fullwidth is-danger add-shadow is-extra-height is-small-caps"
@@ -117,7 +120,6 @@ export default {
 
 .title-500 {
   text-align: justify;
-  font-size: 1.6rem;
   line-height: 1.4;
   margin-bottom: 2rem;
   white-space: pre-wrap;

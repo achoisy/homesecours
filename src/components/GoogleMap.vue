@@ -1,7 +1,7 @@
 <template>
   <div class="tile is-parent" :class="size">
     <div class="card tile is-child is-centered carte-offre primary-outlined">
-      <div class="card-image">
+      <div class="card-image" @click="openGoogleMap">
         <figure class="image">
           <img
             :src="
