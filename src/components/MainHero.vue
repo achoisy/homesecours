@@ -31,7 +31,7 @@
                 size="is-large"
                 label="intervention urgente"
                 icon-right="clock-fast"
-                @click="() => routerPush('urgence')"
+                @click="() => routerPush('landing')"
               >
               </b-button>
             </div>
