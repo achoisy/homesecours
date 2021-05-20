@@ -5,13 +5,10 @@
         <a class="is-active"><i class="fas fa-home mr-2"></i>accueil</a>
       </li>
       <li>
-        <a>services</a>
+        <a>à propos</a>
       </li>
       <li>
         <a>contact</a>
-      </li>
-      <li>
-        <a>avis clients</a>
       </li>
       <li>
         <a>galerie</a>

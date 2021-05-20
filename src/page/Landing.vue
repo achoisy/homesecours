@@ -2,18 +2,20 @@
   <div class="landing" style="height: 100%">
     <Navbar />
     <UrgentAction :class="{ 'pt-5': $screen.breakpoint == 'mobile' }" />
-    <section class="section has-background-white-bis">
+    <section
+      class="section has-background-white-bis"
+      :class="{ 'px-4': $screen.breakpoint == 'mobile' }"
+    >
       <div class="tile is-ancestor is-flex-wrap-wrap">
         <CarteOffre
-          v-for="(offre, index2) in offres"
+          v-for="(offre, index) in sOffres"
           :offre="offre"
-          :key="index2"
+          :key="index"
           :size="getSize"
         />
         <GoogleMap :size="getSize" />
         <AvisClient />
       </div>
-      <div class="tile is-ancestor is-flex-wrap-wrap"></div>
     </section>
     <Footer />
     <b-modal
@@ -65,43 +67,67 @@ export default {
         {
           id: 1,
           title: 'SERRURERIE',
-          text: 'ceci est le texte',
+          text:
+            'Changement de cylindre, retrait de clé cassé, ouverture de porte, pose de serrure...',
           color: '',
+          action: {
+            label: 'à partir de 25€',
+          },
           backgroundImage: 'serrurerie.jpg',
         },
         {
           id: 2,
           title: 'PLOMBERIE',
-          text: 'ceci est le texte',
+          text:
+            'Recherche de fuite, débouchage canalisation, fuite WC, pose de mitigeur standard, robinet, chauffe-eau électrique...',
           color: '',
+          action: {
+            label: 'à partir de 25€',
+          },
           backgroundImage: 'plomberie.jpg',
         },
         {
           id: 3,
           title: 'ELECTRICITE',
-          text: 'ceci est le texte',
+          text:
+            "Recherche de panne, changement d'empoule, pose de réglette, prise de courant, interrupteur...",
           color: '',
+          action: {
+            label: 'à partir de 45€',
+          },
           backgroundImage: 'electricite.jpg',
         },
         {
           id: 4,
           title: 'PEINTURE',
-          text: 'ceci est le texte',
+          text:
+            'Pour tous vos travaux de lessivage, peinture intérieur et extérieur, enduisage...',
           color: '',
+          action: {
+            label: 'demander un devis',
+          },
           backgroundImage: 'peinture.jpg',
         },
         {
           id: 5,
           title: 'MENUISERIE BOIS/ALU',
-          text: 'ceci est le texte',
+          text:
+            'Pose de porte, séparation placo, plan de travail, assemblage de meuble...',
           color: '',
+          action: {
+            label: 'demander un devis',
+          },
           backgroundImage: 'menuiserie.jpg',
         },
         {
           id: 6,
           title: 'RENOVATION',
-          text: 'ceci est le texte',
+          text:
+            'Pose de carrelage et faience, renovation de cuisine, salle de bain, réseaux électrique et eau...',
           color: '',
+          action: {
+            label: 'demander un devis',
+          },
           backgroundImage: 'renovation.jpg',
         },
       ],
@@ -109,17 +135,7 @@ export default {
   },
   computed: {
     sOffres: function() {
-      switch (this.$screen.breakpoint) {
-        case 'mobile': // 2
-          return this.createOffreList(1);
-        case 'tablet': // 2
-          return this.createOffreList(2);
-        case 'desktop': // 3
-          return this.createOffreList(3);
-        default:
-          // 4
-          return this.createOffreList(4);
-      }
+      return shuffle(this.offres);
     },
     getSize: function() {
       switch (this.$screen.breakpoint) {
@@ -136,22 +152,6 @@ export default {
     },
   },
   methods: {
-    confirm() {
-      this.$buefy;
-    },
-    createOffreList(nbColumns) {
-      let offreList = [];
-      shuffle(this.offres).forEach((offre) => {
-        if (offreList.length <= 0) {
-          offreList.push([offre]);
-        } else if (offreList[offreList.length - 1].length < nbColumns) {
-          offreList[offreList.length - 1].push(offre);
-        } else {
-          offreList.push([offre]);
-        }
-      });
-      return offreList;
-    },
     onIntersectionElement: function(value) {
       this.stickNavbar = !value;
       console.log(this.stickNavbar);

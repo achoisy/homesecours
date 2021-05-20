@@ -10,7 +10,7 @@
         <Menu />
       </nav>
     </div>
-    <div class="hero-body" style="z-index: 11;">
+    <div class="hero-body" style="z-index: 5;">
       <div class="container">
         <div class="columns ">
           <div class="column is-8-tablet is-offset-2-tablet">

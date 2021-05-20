@@ -1,7 +1,10 @@
 <template>
   <div class="tile is-parent" :class="size">
-    <div class="card tile is-child is-centered carte-offre primary-outlined">
-      <div class="card-image" @click="openGoogleMap">
+    <div class="card is-child carte-offre is-flex is-flex-direction-column">
+      <div
+        class="card-image is-flex-grow-1 image-is-centered"
+        @click="openGoogleMap"
+      >
         <figure class="image">
           <img
             :src="
@@ -11,9 +14,10 @@
           />
         </figure>
       </div>
-      <footer style="width: 100%;">
+      <footer class="offre-card-footer" style="width: 100%;">
         <b-button
-          class="button is-fullwidth has-text-primary is-small-caps carte-offre"
+          class="button is-fullwidth is-primary is-extra-height is-small-caps"
+          :class="{ 'carte-offre': isNotMobile }"
           size="is-large"
           label="rechercher itinéraire"
           icon-right="map-marker-radius-outline"
@@ -37,6 +41,10 @@ export default {
         'markers=label:Home Secours|14.608202,-61.091635&zoom=15&size=400x400&key=AIzaSyCGcz-eYSzyRnV2gkOv_dFbk6JL6IbXoMQ';
       return encodeURI(mapMaker);
     },
+    isNotMobile: function() {
+      return this.$screen.breakpoint != 'mobile' ? true : false;
+      // return this.$screen.width >= 1024 ? true : false;
+    },
   },
   methods: {
     openGoogleMap: function() {
@@ -52,12 +60,10 @@ export default {
 <style lang="scss">
 @import '../styles/colors';
 
-.is-centered {
+.image-is-centered {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
   flex-direction: column;
+  justify-content: center;
 }
 .primary-outlined {
   border: 1.5px solid $blue-lighter;

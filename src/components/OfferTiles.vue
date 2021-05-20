@@ -1,10 +1,14 @@
 <template>
   <div class="tile is-parent" :class="size">
     <div
-      class="card tile is-child carte-offre is-flex is-flex-direction-column "
+      class="card tile is-child  is-flex is-flex-direction-column "
+      :class="{ 'carte-offre': isNotMobile }"
     >
       <div class="card-image">
-        <figure class="image is-4by3">
+        <figure
+          class="image is-4by3"
+          :class="{ 'is-4by3': isNotMobile, 'is-2by1': !isNotMobile }"
+        >
           <img
             :src="`/assets/img/${offre.backgroundImage}`"
             alt="Placeholder image"
@@ -17,15 +21,15 @@
           </div>
         </figure>
       </div>
-      <div class="card-content is-flex-grow-1">
-        <p class="subtitle">{{ offre.text }}</p>
+      <div class="card-content is-flex-grow-1 p-4">
+        <p class="subtitle line-clamp" v-html="offre.text"></p>
       </div>
-      <footer class="card-footer">
+      <footer class="card-footer offre-card-footer">
         <b-button
-          class="button is-fullwidth is-primary is-extra-height is-small-caps carte-offre"
+          class="button is-fullwidth is-primary is-extra-height is-small-caps "
+          :class="{ 'carte-offre': isNotMobile }"
           size="is-large"
-          label="prendre rendez-vous"
-          icon-right="calendar-month-outline"
+          :label="offre.action.label"
         >
         </b-button>
       </footer>
@@ -48,14 +52,18 @@ export default {
   },
   computed: {
     isNotMobile: function() {
-      //return this.$screen.breakpoint != 'mobile' ? true : false;
-      return this.$screen.width >= 1024 ? true : false;
+      return this.$screen.breakpoint != 'mobile' ? true : false;
+      // return this.$screen.width >= 1024 ? true : false;
     },
   },
 };
 </script>
 
 <style lang="scss">
+@import '../styles/colors';
+.offre-card-footer {
+  height: 4rem;
+}
 .carte-offre {
   border-radius: 5px 5px 15px 15px;
 }
@@ -73,5 +81,15 @@ footer .carte-offre {
   bottom: 1rem;
   left: 1rem;
   max-width: 250px;
+}
+.card-content {
+  color: $black-ter;
+  overflow: hidden;
+}
+.line-clamp {
+  display: -webkit-box;
+  text-align: left;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 </style>
