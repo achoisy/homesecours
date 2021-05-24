@@ -34,6 +34,7 @@
 
 <script>
 import { shuffle } from 'lodash';
+import productList from '../assets/product-list.json';
 import Carousel from '../components/Carousel';
 import RgpdModal from '../components/RGPD-validation-form';
 import UrgentAction from '../components/MainHero';
@@ -63,74 +64,7 @@ export default {
     return {
       stickNavbar: false,
       isRgpdModalActive: false,
-      offres: [
-        {
-          id: 1,
-          title: 'SERRURERIE',
-          text:
-            'Changement de cylindre, retrait de clé cassé, ouverture de porte, pose de serrure...',
-          color: '',
-          action: {
-            label: 'à partir de 25€',
-          },
-          backgroundImage: 'serrurerie.jpg',
-        },
-        {
-          id: 2,
-          title: 'PLOMBERIE',
-          text:
-            'Recherche de fuite, débouchage canalisation, fuite WC, pose de mitigeur standard, robinet, chauffe-eau électrique...',
-          color: '',
-          action: {
-            label: 'à partir de 25€',
-          },
-          backgroundImage: 'plomberie.jpg',
-        },
-        {
-          id: 3,
-          title: 'ELECTRICITE',
-          text:
-            "Recherche de panne, changement d'empoule, pose de réglette, prise de courant, interrupteur...",
-          color: '',
-          action: {
-            label: 'à partir de 45€',
-          },
-          backgroundImage: 'electricite.jpg',
-        },
-        {
-          id: 4,
-          title: 'PEINTURE',
-          text:
-            'Pour tous vos travaux de lessivage, peinture intérieur et extérieur, enduisage...',
-          color: '',
-          action: {
-            label: 'demander un devis',
-          },
-          backgroundImage: 'peinture.jpg',
-        },
-        {
-          id: 5,
-          title: 'MENUISERIE BOIS/ALU',
-          text:
-            'Pose de porte, séparation placo, plan de travail, assemblage de meuble...',
-          color: '',
-          action: {
-            label: 'demander un devis',
-          },
-          backgroundImage: 'menuiserie.jpg',
-        },
-        {
-          id: 6,
-          title: 'RENOVATION',
-          text:
-            'Pose de carrelage et faience, renovation de cuisine, salle de bain, réseaux électrique et eau...',
-          color: '',
-          action: {
-            label: 'demander un devis',
-          },
-          backgroundImage: 'renovation.jpg',
-        },
-      ],
+      offres: productList,
     };
   },
   computed: {

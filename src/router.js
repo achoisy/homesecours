@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 // page import
 import Landing from './page/Landing.vue';
 import Urgence from './page/Urgence.vue';
+import Devis from './page/Devis.vue';
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,12 @@ const routes = [
     path: '/urgence',
     name: 'urgence',
     component: Urgence,
+  },
+  {
+    path: '/devis/:id',
+    name: 'devis',
+    component: Devis,
+    props: true,
   },
   {
     path: '*',

@@ -1,0 +1,11 @@
+.is-bottom-fixed {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  width: 100%;
+  z-index: 10;
+}
+
+.is-display-block {
+  display: block !important;
+}

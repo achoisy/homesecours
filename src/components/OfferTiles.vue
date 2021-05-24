@@ -30,6 +30,7 @@
           :class="{ 'carte-offre': isNotMobile }"
           size="is-large"
           :label="offre.action.label"
+          @click="() => routerPush(`/devis/${offre.id}`)"
         >
         </b-button>
       </footer>
@@ -47,6 +48,7 @@ export default {
       text: String,
       color: String,
       backgroundImage: String,
+      questions: Array,
     },
     size: String,
   },
@@ -54,6 +56,11 @@ export default {
     isNotMobile: function() {
       return this.$screen.breakpoint != 'mobile' ? true : false;
       // return this.$screen.width >= 1024 ? true : false;
+    },
+  },
+  methods: {
+    routerPush: function(address) {
+      this.$router.push(address);
     },
   },
 };

@@ -1,0 +1,113 @@
+[
+  {
+    "id": "1",
+    "title": "SERRURERIE",
+    "text": "Changement de cylindre, retrait de clé cassé, ouverture de porte, pose de serrure...",
+    "color": "",
+    "action": {
+      "label": "à partir de 25€"
+    },
+    "backgroundImage": "serrurerie.jpg",
+    "questions": [
+      { "title": "Changement de cylindre" },
+      { "title": "Pose serrure 3 points" },
+      { "title": "Retrait de clé cassé" },
+      { "title": "Ouverture de porte" },
+      { "title": "Pose de serrure" },
+      { "title": "Barre anti panique" },
+      { "title": "Cylindre de haute sécurité" },
+      { "title": "autre..." }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "PLOMBERIE",
+    "text": "Recherche de fuite, débouchage canalisation, fuite WC, pose de mitigeur standard, robinet, chauffe-eau électrique...",
+    "color": "",
+    "action": {
+      "label": "à partir de 25€"
+    },
+    "backgroundImage": "plomberie.jpg",
+    "questions": [
+      { "title": "Recherche de fuite" },
+      { "title": "Débouchage canalisation" },
+      { "title": "Fuite WC" },
+      { "title": "Probléme d'eau chaude" },
+      { "title": "Installation chauffe-eau électrique" },
+      { "title": "Travaux de rénovation" },
+      { "title": "installation mitigeur, robinet..." },
+      { "title": "Autre..." }
+    ]
+  },
+  {
+    "id": "3",
+    "title": "ELECTRICITE",
+    "text": "Recherche de panne, changement d'empoule, pose de réglette, prise de courant, interrupteur...",
+    "color": "",
+    "action": {
+      "label": "à partir de 45€"
+    },
+    "backgroundImage": "electricite.jpg",
+    "questions": [
+      { "title": "Recherche de panne" },
+      { "title": "changement ampoule vis ou barillet + douille" },
+      { "title": "Réglette salle de bain" },
+      { "title": "Prise de courant" },
+      { "title": "Interrupteur simple, double..." },
+      { "title": "installation électrique" },
+      { "title": "Autre..." }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "PEINTURE",
+    "text": "Pour tous vos travaux de lessivage, peinture intérieur et extérieur, enduisage...",
+    "color": "",
+    "action": {
+      "label": "demander un devis"
+    },
+    "backgroundImage": "peinture.jpg",
+    "questions": [
+      { "title": "Lessivage" },
+      { "title": "Peinture interieur" },
+      { "title": "peinture exterieur" },
+      { "title": "Enduisage" },
+      { "title": "Autre..." }
+    ]
+  },
+  {
+    "id": "5",
+    "title": "MENUISERIE BOIS/ALU",
+    "text": "Pose de porte, séparation placo, plan de travail, assemblage de meuble...",
+    "color": "",
+    "action": {
+      "label": "demander un devis"
+    },
+    "backgroundImage": "menuiserie.jpg",
+    "questions": [
+      { "title": "Porte avec ou sans châssis" },
+      { "title": "Séparation placo" },
+      { "title": "plan de travail" },
+      { "title": "Assemblage meuble de salle de bain" },
+      { "title": "Autre..." }
+    ]
+  },
+  {
+    "id": "6",
+    "title": "RENOVATION",
+    "text": "Pose de carrelage et faience, renovation de cuisine, salle de bain, réseaux électrique et eau...",
+    "color": "",
+    "action": {
+      "label": "demander un devis"
+    },
+    "backgroundImage": "renovation.jpg",
+    "questions": [
+      { "title": "renovation de cuisine" },
+      { "title": "Assemblage meuble de salle de bain" },
+      { "title": "Pose de carrelage et faience" },
+      { "title": "Installation de douche italienne" },
+      { "title": "Pose de paroi de douche standard" },
+      { "title": "Autre..." }
+    ]
+  }
+]

@@ -4,11 +4,12 @@
     :class="{ 'on-mobile': $screen.breakpoint == 'mobile' }"
   >
     <div
-      class="hero-head has-background-danger is-flex is-align-items-center is-justify-content-space-between"
+      class="hero-head has-background-primary is-flex is-align-items-center is-justify-content-space-between"
       :class="{ 'p-5': $screen.width >= 1024, 'p-3': $screen.width >= 600 }"
     >
       <p class="title is-size-5-mobile has-text-light m-4">
-        Demande Urgente d'Intervention
+        Demande de Devis <br />
+        {{ offre.title }}
       </p>
       <a class="p-5" @click="() => routerPush('/')">
         <span class="icon has-text-white is-size-3 is-size-4-mobile">
@@ -55,10 +56,12 @@
                           <option disabled value=""
                             >Selectionnez votre besoin...</option
                           >
-                          <option>Serrurerie</option>
-                          <option>Plomberie</option>
-                          <option>Electricité</option>
-                          <option>Autre...</option>
+                          <option
+                            v-for="(question, index) in offre.questions"
+                            :key="index"
+                          >
+                            {{ question.title }}</option
+                          >
                         </select>
                       </div>
                     </div>
@@ -285,11 +288,16 @@
 
 <script>
 import PhoneNumber from 'awesome-phonenumber';
+import productList from '../assets/product-list.json';
 
 export default {
-  name: 'Urgence',
+  name: 'Devis',
+  props: {
+    id: String,
+  },
   data: function() {
     return {
+      offres: productList,
       activeStep: 0,
       navigationButton: true,
       form: {
@@ -320,6 +328,9 @@ export default {
     fullNumber: function() {
       const tel = new PhoneNumber(this.form.tel, this.regionCode);
       return tel.getNumber('international');
+    },
+    offre: function() {
+      return this.offres.find((offre) => offre.id == this.id);
     },
   },
   methods: {
@@ -383,8 +394,7 @@ export default {
     },
     confirmAlert: function() {
       this.$buefy.dialog.alert({
-        message:
-          "Notre service d'urgence va vous recontacter dans les minutes qui suivront. Garder votre téléphone à porter de main. merci.",
+        message: `Notre service ${this.offre.title.toLowerCase()} va vous recontacter dans les minutes qui suivront. Veuillez Garder votre téléphone à porter de main. merci.`,
         confirmText: 'OK',
         onConfirm: this.isConfirm,
       });
