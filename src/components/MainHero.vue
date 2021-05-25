@@ -1,15 +1,5 @@
 <template>
   <section ref="main-hero" class="hero" :class="{ short: isShort }">
-    <div
-      class="hero-fixed is-hidden-mobile ease-in"
-      :class="{
-        sticky: stickNavbar,
-      }"
-    >
-      <nav class="tabs is-boxed is-fullwidth is-large ">
-        <Menu />
-      </nav>
-    </div>
     <div class="hero-body" style="z-index: 5;">
       <div class="container">
         <div class="columns ">
@@ -40,9 +30,16 @@
       </div>
     </div>
 
-    <div class="hero-foot is-hidden-mobile" style="z-index: 11;">
+    <div
+      style="z-index: 11;"
+      :class="
+        stickNavbar
+          ? 'hero-fixed is-hidden-mobile ease-in sticky'
+          : 'hero-foot is-hidden-mobile'
+      "
+    >
       <nav class="tabs is-boxed is-fullwidth is-large">
-        <Menu />
+        <Menu v-on="$listeners" />
       </nav>
     </div>
   </section>

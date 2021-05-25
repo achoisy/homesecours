@@ -244,6 +244,17 @@
                 <div class="column is-half-mobile is-3-desktop">
                   <button
                     class="button is-info is-outlined is-small-caps is-fullwidth"
+                    :class="{ 'is-hidden': activeStep > 0 }"
+                    @click="() => routerPush('/')"
+                  >
+                    <span class="icon is-size-5">
+                      <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="is-size-5 mb-1">retour</span>
+                  </button>
+                  <button
+                    class="button is-info is-outlined is-small-caps is-fullwidth"
+                    :class="{ 'is-hidden': activeStep == 0 }"
                     :disabled="previous.disabled"
                     @click="previous.action"
                   >

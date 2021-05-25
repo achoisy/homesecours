@@ -55,7 +55,7 @@
         <span aria-hidden="true"></span>
       </a>
       <aside class="menu" :class="{ 'fixed-burger': stickyBurger }">
-        <Menu />
+        <Menu v-on="$listeners" />
       </aside>
     </b-sidebar>
     <Observer

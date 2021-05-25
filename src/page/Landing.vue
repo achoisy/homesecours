@@ -1,7 +1,10 @@
 <template>
   <div class="landing" style="height: 100%">
-    <Navbar />
-    <UrgentAction :class="{ 'pt-5': $screen.breakpoint == 'mobile' }" />
+    <Navbar @menu="updateActiveMenu" />
+    <UrgentAction
+      :class="{ 'pt-5': $screen.breakpoint == 'mobile' }"
+      @menu="updateActiveMenu"
+    />
     <section
       class="section has-background-white-bis"
       :class="{ 'px-4': $screen.breakpoint == 'mobile' }"
@@ -60,11 +63,17 @@ export default {
     Navbar,
     Footer,
   },
+  mounted() {
+    this.$on('menu', function(name) {
+      console.log('name :', name);
+    });
+  },
   data: function() {
     return {
       stickNavbar: false,
       isRgpdModalActive: false,
       offres: productList,
+      activeMenu: 'accueil',
     };
   },
   computed: {
@@ -89,6 +98,10 @@ export default {
     onIntersectionElement: function(value) {
       this.stickNavbar = !value;
       console.log(this.stickNavbar);
+    },
+    updateActiveMenu: function(name) {
+      console.log('name: ', name);
+      this.activeMenu = name;
     },
   },
 };
