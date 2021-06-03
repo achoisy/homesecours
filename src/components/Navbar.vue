@@ -22,42 +22,31 @@
         </div>
       </router-link>
 
-      <a
-        role="button"
-        class="navbar-burger is-hidden-tablet is-align-self-center on-right"
+      <div
+        class="dropdown navbar-burger is-right"
         :class="{ 'is-active': sidebarIsOpen }"
-        aria-label="menu"
-        aria-expanded="false"
-        @click="sideBarToggle"
       >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+        <div class="dropdown-trigger">
+          <a
+            role="button"
+            class="navbar-burger is-hidden-tablet is-align-self-center on-right"
+            :class="{ 'is-active': sidebarIsOpen }"
+            aria-label="menu"
+            aria-expanded="false"
+            @click="sideBarToggle"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <Menu @close="sideBarToggle" />
+          </div>
+        </div>
+      </div>
     </div>
-    <b-sidebar
-      type="is-white"
-      :mobile="'reduce'"
-      fullheight
-      right
-      v-model="sidebarIsOpen"
-    >
-      <a
-        role="button"
-        class="navbar-burger"
-        :class="{ 'is-active': sidebarIsOpen }"
-        aria-label="menu"
-        aria-expanded="false"
-        @click="sideBarToggle"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-      <aside class="menu" :class="{ 'fixed-burger': stickyBurger }">
-        <Menu v-on="$listeners" />
-      </aside>
-    </b-sidebar>
     <Observer
       sentinal-name="navbar-end"
       @on-intersection-element="onIntersectionElement"
@@ -124,5 +113,9 @@ export default {
   justify-content: flex-start;
   align-items: center;
   padding: 10px;
+}
+
+.navbar.is-fixed-top {
+  position: sticky !important;
 }
 </style>

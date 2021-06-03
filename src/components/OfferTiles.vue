@@ -22,7 +22,7 @@
         </figure>
       </div>
       <div class="card-content is-flex-grow-1 p-4">
-        <p class="subtitle line-clamp" v-html="offre.text"></p>
+        <p class="subtitle line-clamp">{{ offre.text }}</p>
       </div>
       <footer class="card-footer offre-card-footer">
         <b-button
@@ -98,5 +98,6 @@ footer .carte-offre {
   text-align: left;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>

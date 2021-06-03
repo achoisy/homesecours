@@ -1,24 +1,12 @@
 <template>
   <div class="landing" style="height: 100%">
-    <Navbar @menu="updateActiveMenu" />
-    <UrgentAction
-      :class="{ 'pt-5': $screen.breakpoint == 'mobile' }"
-      @menu="updateActiveMenu"
-    />
+    <Navbar />
+    <UrgentAction :class="{ 'pt-5': $screen.breakpoint == 'mobile' }" />
     <section
-      class="section has-background-white-bis"
+      class="section has-background-white-bis is-flex is-justify-content-center"
       :class="{ 'px-4': $screen.breakpoint == 'mobile' }"
     >
-      <div class="tile is-ancestor is-flex-wrap-wrap">
-        <CarteOffre
-          v-for="(offre, index) in sOffres"
-          :offre="offre"
-          :key="index"
-          :size="getSize"
-        />
-        <GoogleMap :size="getSize" />
-        <AvisClient />
-      </div>
+      <Transition class="is-flex-wrap-wrap" />
     </section>
     <Footer />
     <b-modal
@@ -36,72 +24,44 @@
 </template>
 
 <script>
-import { shuffle } from 'lodash';
-import productList from '../assets/product-list.json';
-import Carousel from '../components/Carousel';
 import RgpdModal from '../components/RGPD-validation-form';
 import UrgentAction from '../components/MainHero';
-import AvisClient from '../components/AvisClient';
-import CarteOffre from '../components/OfferTiles';
 import GoogleMap from '../components/GoogleMap';
-import Menu from '../components/Menu';
 import Observer from '../components/IntersectionObserver';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Transition from './Transition';
 
 export default {
   name: 'Landing',
   components: {
-    Carousel,
     RgpdModal,
     UrgentAction,
-    AvisClient,
-    CarteOffre,
-    GoogleMap,
-    Menu,
     Observer,
     Navbar,
     Footer,
-  },
-  mounted() {
-    this.$on('menu', function(name) {
-      console.log('name :', name);
-    });
+    Transition,
   },
   data: function() {
     return {
       stickNavbar: false,
       isRgpdModalActive: false,
-      offres: productList,
-      activeMenu: 'accueil',
+      transionName: 'move-left',
     };
   },
-  computed: {
-    sOffres: function() {
-      return shuffle(this.offres);
-    },
-    getSize: function() {
-      switch (this.$screen.breakpoint) {
-        case 'mobile': // 2
-          return 'is-12';
-        case 'tablet': // 2
-          return 'is-6';
-        case 'desktop': // 3
-          return 'is-4';
-        default:
-          // 4
-          return 'is-3';
-      }
+  watch: {
+    $route(to, from) {
+      console.log('from index: ', from.meta.index);
+      console.log('to index: ', to.meta.index);
+      this.transionName =
+        from.meta.index > to.meta.index ? 'move-right' : 'move-left';
     },
   },
+  computed: {},
   methods: {
     onIntersectionElement: function(value) {
       this.stickNavbar = !value;
       console.log(this.stickNavbar);
-    },
-    updateActiveMenu: function(name) {
-      console.log('name: ', name);
-      this.activeMenu = name;
     },
   },
 };
@@ -114,7 +74,7 @@ export default {
 .is-small-caps {
   font-variant: small-caps;
 }
-.short + .section {
-  padding-top: 6rem;
+.section {
+  min-height: 100vh;
 }
 </style>

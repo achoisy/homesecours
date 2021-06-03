@@ -16,44 +16,14 @@
 </template>
 
 <script>
+import listAvis from '../assets/avis-google.json';
+
 export default {
   name: 'Carousel',
   components: {},
   data: function() {
     return {
-      listAvis: [
-        {
-          nom: 'AURÉLIE L.',
-          note: 5,
-          text: 'Intervention rapide et technicien agréable',
-        },
-        {
-          nom: 'Angèle V.',
-          note: 5,
-          text:
-            "Réactivité et qualité de l'intervention étaient au rendez-vous ! C est important de se sentir en confiance.",
-        },
-        {
-          nom: 'CATHERINE A.',
-          note: 4.5,
-          text: 'Intervention rapide et technicien agréable',
-        },
-        {
-          nom: 'ALAIN L.',
-          note: 5,
-          text: 'Intervention très rapide un week-end de paques',
-        },
-        {
-          nom: 'SLIMANE R.',
-          note: 5,
-          text: "Très bonne prestation A l'écoute rapide et efficace",
-        },
-        {
-          nom: 'Flora E.',
-          note: 4,
-          text: 'Réactivité au top. Service irréprochable !',
-        },
-      ],
+      listAvis,
     };
   },
 };

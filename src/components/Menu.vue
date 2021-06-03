@@ -32,6 +32,11 @@ export default {
       ],
     };
   },
+  mounted: function() {
+    if (this.$route.name) {
+      this.activeTab = this.$route.name;
+    }
+  },
   computed: {
     isActive() {
       return this.activeTab;
@@ -39,8 +44,12 @@ export default {
   },
   methods: {
     onMenuClick: function({ target }) {
-      this.activeTab = target.name;
-      this.$emit('menu', target.name);
+      if (this.activeTab != target.name) {
+        // this.$emit('close');
+        this.activeTab = target.name;
+        this.$router.push(target.name);
+        this.$emit('close');
+      }
     },
   },
 };

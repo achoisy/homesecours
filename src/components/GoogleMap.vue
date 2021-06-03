@@ -1,6 +1,8 @@
 <template>
   <div class="tile is-parent" :class="size">
-    <div class="card is-child carte-offre is-flex is-flex-direction-column">
+    <div
+      class="tile card is-child carte-offre is-flex is-flex-direction-column"
+    >
       <div
         class="card-image is-flex-grow-1 image-is-centered"
         @click="openGoogleMap"

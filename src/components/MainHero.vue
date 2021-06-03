@@ -1,6 +1,10 @@
 <template>
   <section ref="main-hero" class="hero" :class="{ short: isShort }">
-    <div class="hero-body" style="z-index: 5;">
+    <div
+      class="hero-body"
+      style="z-index: 5;"
+      :class="{ 'py-5': $screen.breakpoint == 'mobile' }"
+    >
       <div class="container">
         <div class="columns ">
           <div class="column is-8-tablet is-offset-2-tablet">
@@ -39,7 +43,7 @@
       "
     >
       <nav class="tabs is-boxed is-fullwidth is-large">
-        <Menu v-on="$listeners" />
+        <Menu />
       </nav>
     </div>
   </section>
