@@ -306,6 +306,7 @@ export default {
       form: {
         nom: '',
         tel: '',
+        int_tel: '',
         adresse: '',
         message: '',
         raison: '',
@@ -321,7 +322,16 @@ export default {
         raison: '',
         condition: false,
       },
+      loading: false,
     };
+  },
+  watch: {
+    'form.tel': function(val, oldVal) {
+      const tel = new PhoneNumber(val, this.regionCode);
+      if (tel.isValid) {
+        this.form.int_tel = tel.getNumber();
+      }
+    },
   },
   computed: {
     checkPhone: function() {
@@ -338,7 +348,8 @@ export default {
       // (optional) Wait until recaptcha has been loaded.
       await this.$recaptchaLoaded();
       // Execute reCAPTCHA with action "login".
-      const token = await this.$recaptcha('login');
+      const token = await this.$recaptcha('urgence');
+      return token;
       // Send the token to server with submited form for validation.
     },
     routerPush: function(address) {
@@ -392,17 +403,40 @@ export default {
     unhideButton: function() {
       this.navigationButton = true;
     },
-    confirmAlert: function() {
-      this.$buefy.dialog.alert({
-        message:
-          "Notre service d'urgence va vous recontacter dans les minutes qui suivront. Garder votre téléphone à porter de main. merci.",
-        confirmText: 'OK',
-        onConfirm: this.isConfirm,
-      });
-    },
-    isConfirm: function() {
-      // TODO: faire le fetch vers le serveur
+    finish: function() {
       this.$router.push('/');
+    },
+    confirmAlert: async function() {
+      this.loading = true;
+      this.recaptcha()
+        .then((token) => {
+          // Set header with autho token
+          const headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+          headers.append('Authorization', token);
+
+          // Set Body
+          const body = JSON.stringify({ form: this.form });
+          const request = new Request(
+            `${twilioServer.baseUrl}/public/urgence/`,
+            {
+              method: 'POST',
+              headers,
+              body,
+              cache: 'default',
+            }
+          );
+
+          return fetch(request);
+        })
+        .then((res) => {
+          console.log('res: ', res);
+          this.$buefy.dialog.alert({
+            message: `Notre service d'urgence va vous contacter dans les minutes qui suivront. Dans quelques instants, Vous allez recevoir un sms de confirmation.`,
+            confirmText: 'OK',
+            onConfirm: this.finish,
+          });
+        });
     },
   },
 };

@@ -278,7 +278,10 @@
                   </button>
                   <button
                     class="button is-success is-small-caps is-fullwidth"
-                    :class="{ 'is-hidden': activeStep < 2 }"
+                    :class="{
+                      'is-hidden': activeStep < 2,
+                      'is-loading': loading,
+                    }"
                     :disabled="!form.condition"
                     @click="confirmAlert"
                   >
@@ -300,6 +303,7 @@
 <script>
 import PhoneNumber from 'awesome-phonenumber';
 import productList from '../assets/product-list.json';
+import { twilioServer } from '../env-handler';
 
 export default {
   name: 'Devis',
@@ -314,11 +318,12 @@ export default {
       form: {
         nom: '',
         tel: '',
+        int_tel: '',
         adresse: '',
         message: '',
         raison: '',
         condition: true,
-        token: '',
+        service: '',
       },
       regionCode: 'MQ',
       error: {
@@ -329,7 +334,16 @@ export default {
         raison: '',
         condition: false,
       },
+      loading: false,
     };
+  },
+  watch: {
+    'form.tel': function(val, oldVal) {
+      const tel = new PhoneNumber(val, this.regionCode);
+      if (tel.isValid) {
+        this.form.int_tel = tel.getNumber();
+      }
+    },
   },
   computed: {
     checkPhone: function() {
@@ -349,7 +363,8 @@ export default {
       // (optional) Wait until recaptcha has been loaded.
       await this.$recaptchaLoaded();
       // Execute reCAPTCHA with action "login".
-      const token = await this.$recaptcha('login');
+      const token = await this.$recaptcha('devis');
+      return token;
       // Send the token to server with submited form for validation.
     },
     routerPush: function(address) {
@@ -403,16 +418,38 @@ export default {
     unhideButton: function() {
       this.navigationButton = true;
     },
-    confirmAlert: function() {
-      this.$buefy.dialog.alert({
-        message: `Notre service ${this.offre.title.toLowerCase()} va vous recontacter dans les minutes qui suivront. Veuillez Garder votre téléphone à porter de main. merci.`,
-        confirmText: 'OK',
-        onConfirm: this.isConfirm,
-      });
-    },
-    isConfirm: function() {
-      // TODO: faire le fetch vers le serveur
+    finish: function() {
       this.$router.push('/');
+    },
+    confirmAlert: async function() {
+      this.loading = true;
+      this.form.service = this.offre.title;
+      this.recaptcha()
+        .then((token) => {
+          // Set header with autho token
+          const headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+          headers.append('Authorization', token);
+
+          // Set Body
+          const body = JSON.stringify({ form: this.form });
+          const request = new Request(`${twilioServer.baseUrl}/public/devis/`, {
+            method: 'POST',
+            headers,
+            body,
+            cache: 'default',
+          });
+
+          return fetch(request);
+        })
+        .then((res) => {
+          console.log('res: ', res);
+          this.$buefy.dialog.alert({
+            message: `Notre service ${this.offre.title.toLowerCase()} va vous recontacter durant nos horaires d'ouverture. Dans quelques instants, Vous allez recevoir un sms de confirmation.`,
+            confirmText: 'OK',
+            onConfirm: this.finish,
+          });
+        });
     },
   },
 };
