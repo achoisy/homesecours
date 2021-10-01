@@ -26,7 +26,7 @@
 <script>
 import RgpdModal from '../components/RGPD-validation-form';
 import UrgentAction from '../components/MainHero';
-import GoogleMap from '../components/GoogleMap';
+// import GoogleMap from '../components/GoogleMap';
 import Observer from '../components/IntersectionObserver';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';

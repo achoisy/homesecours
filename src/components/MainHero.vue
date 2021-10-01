@@ -17,7 +17,12 @@
               >
                 Une urgence ? Un problème de sérrure, de plomberie ou encore
                 electrique qui nécessite une
-                <span class="font-900">intervention urgente</span>? <br />
+                <span
+                  class="font-900"
+                  :class="{ 'has-text-primary': isNotMobile }"
+                  >intervention urgente</span
+                >
+                ? <br />
                 En seulement 3 clicks, on prend en charge votre problème !
               </p>
               <b-button
@@ -83,6 +88,10 @@ export default {
         return true;
       }
       return false;
+    },
+    isNotMobile: function() {
+      return this.$screen.breakpoint != 'mobile' ? true : false;
+      // return this.$screen.width >= 1024 ? true : false;
     },
   },
   methods: {

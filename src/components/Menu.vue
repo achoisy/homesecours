@@ -10,9 +10,10 @@
           :name="tab.name"
           :class="{ 'is-active': activeTab == tab.name }"
           @click="onMenuClick"
-          ><i v-if="tab.name == 'accueil'" class="fas fa-home mr-2"></i
-          >{{ tab.text }}</a
         >
+          <i class="fas mr-2" :class="`${tab.icon}`"></i>
+          {{ tab.text }}
+        </a>
       </li>
     </ul>
   </div>
@@ -25,10 +26,10 @@ export default {
     return {
       activeTab: 'accueil',
       tabList: [
-        { name: 'accueil', text: 'accueil' },
-        { name: 'propos', text: 'à propos' },
-        { name: 'contact', text: 'contact' },
-        { name: 'galerie', text: 'galerie' },
+        { name: 'accueil', text: 'accueil', icon: 'fa-home' },
+        { name: 'propos', text: 'à propos', icon: 'fa-info' },
+        { name: 'contact', text: 'contact', icon: 'fa-compass' },
+        // { name: 'galerie', text: 'galerie' },
       ],
     };
   },
