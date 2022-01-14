@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { shuffle } from 'lodash';
+// import { shuffle } from 'lodash';
 import CarteOffre from '../components/OfferTiles';
 import productList from '../assets/product-list.json';
 
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     sOffres: function() {
-      return shuffle(this.offres);
+      return this.offres;
     },
     getSize: function() {
       switch (this.$screen.breakpoint) {

@@ -35,8 +35,8 @@
             <span class="title has-text-primary is-4">Notre Adresse</span>
           </span>
           <p class="subtitle">
-            13-21 Boulevard Du 25 juin 1635 <br />
-            Shoelcher
+            13-21 Boulevard Du 25 juin 1935 <br />
+            Schoelcher
           </p>
 
           <span class="icon-text has-text-primary mb-3">
