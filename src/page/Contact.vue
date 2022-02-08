@@ -46,6 +46,7 @@
             <span class="title has-text-primary is-4">Nos numéros</span>
           </span>
           <p class="subtitle">
+            Téléphone: 05 96 72 27 22 <br />
             Hotline: 07 55 53 68 96 <br />
             Portable: 06 96 38 06 02
           </p>
